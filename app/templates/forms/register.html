@@ -2,19 +2,23 @@
 {% load crispy_forms_tags %}
 {% block body %}
 
-<div class="col bg-dark text-danger rounded">
-    <h1 class="m-2">REGISTER</h1>
-    <form method="post" class="m-2" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <br>
-        <button type="submit" class="btn btn-outline-danger" style="  border-radius:10px;">JOIN US!</button>
-    </form>
-    <div class="border-top pt-3">
-        <small class="text-muted ">
-            Already Have An Account? <a href="{% url 'login' %}" class="ml-2 text-danger"> LOGIN </a>
-        </small>
-    </div>
+<div class="body">
+    <main class="bg-dark text-danger rounded p-2">
+        <h1 class="m-2">REGISTER</h1>
+        <form method="post" class="m-2" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <br>
+            <button type="submit" class="btn btn-outline-danger" style="  border-radius:10px;">JOIN US!</button>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted ">
+                Already Have An Account? <a href="{% url 'login' %}" class="ml-2 text-danger"> LOGIN </a>
+            </small>
+        </div>
+    </main>
+
 </div>
+
 
 {% endblock body %}

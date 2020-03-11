@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
     <title>Yazlab</title>
 </head>
 
 <body>
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="wrapper">
         {% include "includes/navbar.html" %}
         {% block body %}
 
@@ -22,6 +23,23 @@
 
 
     <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #ed6663;
+            font-family: "Montserrat";
+
+        }
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+        }
+
+        .footer {
+            color: #f6f6f6;
+        }
+
         a,
         a:focus,
         a:hover {
@@ -40,12 +58,27 @@
             background: #1b262c;
         }
 
-        .col {
-            margin: 100px auto;
+        .wrapper {
+            display: flex;
+            flex-flow: row wrap;
+            text-align: center;
+            max-width: 80vw;
+            margin: 20px auto;
         }
 
-        .col-sm {
-            margin: 250px auto;
+        .wrapper>* {
+            flex: 1 100%;
+        }
+
+        .body {
+            max-width: 80vw;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        main {
+            margin: 20px auto;
         }
 
         .btn-secondary {
@@ -74,107 +107,17 @@
             border: none
         }
 
-        html,
-        body {
-            height: 100%;
-            background-color: #ed6663;
-            font-family: "Montserrat";
-
-        }
-
-        body {
-            display: -ms-flexbox;
-            display: flex;
-        }
-
-        .loginbtn {
-            background-color: #0f4c81;
-        }
-
-        .loginbtn:hover,
-        .loginbtn:focus {
-            background-color: #1b262c;
-        }
-
-
-        .registerbtn {
-            background-color: #ffa372;
-        }
-
-        .registerbtn:hover,
-        .registerbtn:focus {
-            background-color: #1b262c;
-        }
-
-        .cover-container {
-            max-width: 42em;
-        }
-
-        .header {
-            margin-bottom: 2rem;
-        }
-
-        .header-brand {
-            margin-bottom: 0;
-        }
-
-        .nav-header .nav-link {
-            padding: .25rem 0;
-            font-weight: 700;
-            color: rgba(255, 255, 255, .5);
-            border-bottom: .25rem solid transparent;
-        }
-
-        .nav-header .nav-link:hover,
-        .nav-header .nav-link:focus {
-            border-bottom-color: rgba(255, 255, 255, .25);
-        }
-
-        .nav-header .nav-link+.nav-link {
-            margin-left: 1rem;
-        }
-
-        .nav-header .active {
-            color: #fff;
-            border-bottom-color: #fff;
-        }
-
-        @media (min-width: 48em) {
-            .header-brand {
-                float: left;
-            }
-
-            .nav-header {
-                float: right;
-            }
-        }
-
-        .cover {
-            padding: 0 1.5rem;
-        }
-
-        .cover .btn-lg {
-            padding: .75rem 1.25rem;
-            font-weight: 700;
-        }
-
-
-        .footer {
-            color: #f6f6f6;
-        }
-
-        .container {
-            max-width: 40vw;
-        }
-
-        .pricing-header {
-            max-width: 500px;
-        }
-
-        .card-deck .card {
-            min-width: 220px;
+        .m-a {
+            margin: auto;
         }
     </style>
+
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+    <script>
+        const grid = document.querySelector('.grid');
+    </script>
+    <script src="https://kit.fontawesome.com/802d737aeb.js" crossorigin="anonymous"></script>
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

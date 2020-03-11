@@ -11,8 +11,8 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name="home"),
-    path('profile/uploadbook/', upload_book, name="upload_book"),
-    path('profile', profile, name="profile"),
+    path('accounts/profile/uploadbook/', upload_book, name="upload_book"),
+    path('accounts/profile/', profile, name="profile"),
     path('books', books, name="books"),
     path('register/', register, name="register"),
     path('accounts/login/',

@@ -1,12 +1,74 @@
 <header class="header mb-auto">
-    <div class="inner">
-        <h3 class="header-brand border-bottom border-dark">lib.io</h3>
-        <nav class="nav nav-header justify-content-center">
-            <a class="nav-link active" href="/">Home</a>
-            <a class="nav-link" href="/books">Explore</a>
-            <a class="nav-link" href="/profile/{{user.id}}/books">Your Books</a>
-            <a href="{% url 'login' %} " class="nav-link loginbtn p-1 rounded">Login</a>
-            <a href="{% url 'register' %} " class="nav-link registerbtn p-1 rounded">Register</a>
-        </nav>
-    </div>
+    <h3 class="header-brand border-bottom border-dark">lib.io</h3>
+    <nav class="nav nav-header justify-content-center">
+        <a class="nav-link active" href="/"><i class="fas fa-home mr-1"></i>Home</a>
+        <a class="nav-link" href="/books"><i class="fas fa-globe mr-1"></i>Explore</a>
+        <a class="nav-link" href="/accounts/profile/"><i class="fas fa-book mr-1"></i>Your Books</a>
+        {% if user.is_authenticated %}
+        <span class="nav-link text-warning"><i class="fas fa-user-alt mr-1"></i>{{user.username}}</span>
+        <a href="{% url 'logout' %}" class="nav-link loginbtn p-1 rounded"><i
+                class="fas fa-sign-out-alt mr-1"></i>logout</a>
+        {% else %}
+        <a href="{% url 'login' %} " class="nav-link loginbtn p-1 rounded"> <i
+                class="fas fa-sign-in-alt mr-1"></i>Login</a>
+        <a href="{% url 'register' %} " class="nav-link registerbtn p-1 rounded"> <i
+                class="fas fa-user-plus mr-1"></i>Register</a>
+        {% endif %}
+
+    </nav>
+
+    <style>
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .header-brand {
+            margin-bottom: 0;
+        }
+
+        .nav-header .nav-link {
+            padding: .25rem 0;
+            font-weight: 700;
+            color: rgba(255, 255, 255, .5);
+        }
+
+        .nav-header .nav-link:hover,
+        .nav-header .nav-link:focus {
+            color: #f6f6f6;
+        }
+
+        .nav-header .nav-link+.nav-link {
+            margin-left: 1rem;
+        }
+
+        .loginbtn {
+            background-color: #0f4c81;
+        }
+
+        .loginbtn:hover,
+        .loginbtn:focus {
+            background-color: #1b262c;
+        }
+
+
+        .registerbtn {
+            background-color: #ffa372;
+        }
+
+        .registerbtn:hover,
+        .registerbtn:focus {
+            background-color: #1b262c;
+        }
+
+
+        @media (min-width: 48em) {
+            .header-brand {
+                float: left;
+            }
+
+            .nav-header {
+                float: right;
+            }
+        }
+    </style>
 </header>

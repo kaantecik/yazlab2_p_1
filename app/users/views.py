@@ -12,9 +12,8 @@ def register(request):
             form.save()
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-            messages.success(
-                request, f'Hello {username}! Your account has been created. You are now able to log in.')
-            return redirect("../login")
+
+            return redirect("../accounts/login")
     else:
         form = RegisterForm()
 

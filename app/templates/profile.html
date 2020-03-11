@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="menu rounded bg-dark ">
+    <h2 class="text-warning m-a">Your Books</h2>
+    <a href="{% url 'upload_book' %}" class="link m-a"><i class="fas fa-upload mr-1"></i>upload</a>
+    <form class="form-inline my-2 my-lg-0 m-a">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"><i
+                class="fas fa-search mr-1"></i>Search</button>
+    </form>
+
+</div>
+<div class="body">
+    {% if  books %}
+    <div class="card-deck mt-5 mb-3 text-center">
+        {% for book in books %}
+        {% if  book.author == request.user %}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal float-left">{{book.name}}</h4>
+                <div class="head-menu float-right">
+                    <a href="{% url 'upload_book' %}" class="text-warning updatebtn mr-2"><i
+                            class="fas fa-edit mr-1"></i>update</a>
+                    <a href="{% url 'upload_book' %}" class="text-danger deletebtn mr-2"><i
+                            class="fas fa-trash mr-1"></i>delete</a>
+                    <small> {{book.author}} </small>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <p>{{book.detail}}</p>
+                <button type="button" class="btn btn-lg btn-outline-danger">Read</button>
+            </div>
+            <div class="card-footer">
+                <small class="float-left">{{book.upload_date}}</small>
+                <small class="float-right">ISBN - 123432 </small>
+            </div>
+        </div>
+
+        {% endif %}
+
+        {% endfor %}
+    </div>
+
+    {% endif %}
+</div>
+
+<style>
+    .card-deck {
+        display: block;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .menu {
+        display: flex;
+        min-height: 70px;
+        margin: 30px auto;
+        justify-content: space-between;
+    }
+
+    .deletebtn,
+    .updatebtn {
+        font-size: 12px;
+    }
+
+    .link {
+        color: #f6f6f6;
+    }
+
+    .link:hover,
+    .link:focus {
+        color: #ed6663;
+    }
+</style>
+
+
+
+{% endblock  %}
