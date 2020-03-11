@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Yazlab</title>
+</head>
+
+<body>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        {% include "includes/navbar.html" %}
+        {% block body %}
+
+        {% endblock  %}
+        {% include "includes/footer.html" %}
+    </div>
+
+
+    <style>
+        a,
+        a:focus,
+        a:hover {
+            color: #0f4c81;
+        }
+
+        .text-warning {
+            color: #ffa372;
+        }
+
+        .text-danger {
+            color: #ed6663 !important;
+        }
+
+        .bg-dark {
+            background: #1b262c;
+        }
+
+        .col {
+            margin: 100px auto;
+        }
+
+        .col-sm {
+            margin: 250px auto;
+        }
+
+        .btn-secondary {
+            color: #ed6663;
+            text-shadow: none;
+            background-color: #1b262c;
+            border: none
+        }
+
+        .btn-outline-danger {
+            border-color: #ed6663;
+            color: #ed6663;
+        }
+
+        .btn-outline-danger:hover,
+        .btn-outline-danger:focus {
+            background-color: #ed6663;
+            color: #f6f6f6;
+        }
+
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            color: #1b262c;
+            text-shadow: none;
+            background-color: #ffa372;
+            border: none
+        }
+
+        html,
+        body {
+            height: 100%;
+            background-color: #ed6663;
+            font-family: "Montserrat";
+
+        }
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+        }
+
+        .loginbtn {
+            background-color: #0f4c81;
+        }
+
+        .loginbtn:hover,
+        .loginbtn:focus {
+            background-color: #1b262c;
+        }
+
+
+        .registerbtn {
+            background-color: #ffa372;
+        }
+
+        .registerbtn:hover,
+        .registerbtn:focus {
+            background-color: #1b262c;
+        }
+
+        .cover-container {
+            max-width: 42em;
+        }
+
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .header-brand {
+            margin-bottom: 0;
+        }
+
+        .nav-header .nav-link {
+            padding: .25rem 0;
+            font-weight: 700;
+            color: rgba(255, 255, 255, .5);
+            border-bottom: .25rem solid transparent;
+        }
+
+        .nav-header .nav-link:hover,
+        .nav-header .nav-link:focus {
+            border-bottom-color: rgba(255, 255, 255, .25);
+        }
+
+        .nav-header .nav-link+.nav-link {
+            margin-left: 1rem;
+        }
+
+        .nav-header .active {
+            color: #fff;
+            border-bottom-color: #fff;
+        }
+
+        @media (min-width: 48em) {
+            .header-brand {
+                float: left;
+            }
+
+            .nav-header {
+                float: right;
+            }
+        }
+
+        .cover {
+            padding: 0 1.5rem;
+        }
+
+        .cover .btn-lg {
+            padding: .75rem 1.25rem;
+            font-weight: 700;
+        }
+
+
+        .footer {
+            color: #f6f6f6;
+        }
+
+        .container {
+            max-width: 40vw;
+        }
+
+        .pricing-header {
+            max-width: 500px;
+        }
+
+        .card-deck .card {
+            min-width: 220px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

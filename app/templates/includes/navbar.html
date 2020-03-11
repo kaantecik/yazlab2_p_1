@@ -1,0 +1,12 @@
+<header class="header mb-auto">
+    <div class="inner">
+        <h3 class="header-brand border-bottom border-dark">lib.io</h3>
+        <nav class="nav nav-header justify-content-center">
+            <a class="nav-link active" href="/">Home</a>
+            <a class="nav-link" href="/books">Explore</a>
+            <a class="nav-link" href="/profile/{{user.id}}/books">Your Books</a>
+            <a href="{% url 'login' %} " class="nav-link loginbtn p-1 rounded">Login</a>
+            <a href="{% url 'register' %} " class="nav-link registerbtn p-1 rounded">Register</a>
+        </nav>
+    </div>
+</header>
