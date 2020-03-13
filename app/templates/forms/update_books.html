@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<div class="body">
+    <main class="bg-dark text-danger rounded p-5">
+        <h1>UPDATE BOOK</h1>
+        <form method="post" class="m-2" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ updatebook_form|crispy }}
+            <br>
+            <button type="submit" class="btn btn-outline-danger" style="  border-radius:10px;">UPDATE</button>
+        </form>
+
+    </main>
+</div>
+
+{% endblock body %}

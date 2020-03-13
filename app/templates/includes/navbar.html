@@ -1,9 +1,12 @@
 <header class="header mb-auto">
     <h3 class="header-brand border-bottom border-dark">lib.io</h3>
     <nav class="nav nav-header justify-content-center">
-        <a class="nav-link active" href="/"><i class="fas fa-home mr-1"></i>Home</a>
         <a class="nav-link" href="/books"><i class="fas fa-globe mr-1"></i>Explore</a>
         <a class="nav-link" href="/accounts/profile/"><i class="fas fa-book mr-1"></i>Your Books</a>
+        {% if user.is_superuser %}
+        <a href="{% url 'settings' %}" class="nav-link"><i class="fas fa-cog mr-1"></i>Settings</a>
+        {% endif %}
+
         {% if user.is_authenticated %}
         <span class="nav-link text-warning"><i class="fas fa-user-alt mr-1"></i>{{user.username}}</span>
         <a href="{% url 'logout' %}" class="nav-link loginbtn p-1 rounded"><i

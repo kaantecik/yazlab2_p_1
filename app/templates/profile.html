@@ -1,39 +1,54 @@
 {% extends "layout.html" %}
+{% load tz %}
+{% get_current_timezone as TIME_ZONE %}
 {% block body %}
-<div class="menu rounded bg-dark ">
-    <h2 class="text-warning m-a">Your Books</h2>
-    <a href="{% url 'upload_book' %}" class="link m-a"><i class="fas fa-upload mr-1"></i>upload</a>
-    <form class="form-inline my-2 my-lg-0 m-a">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"><i
-                class="fas fa-search mr-1"></i>Search</button>
-    </form>
+<div class="menu rounded bg-dark">
+    <h2 class="text-warning m-a">Your Books <span class="badge small badge-pill badge-success"
+            style="position: relative; bottom :5px;">{{count}}</span> <a href="{% url 'books' %}"
+            class="btn btn-outline-danger btn-sm m-a"><i class="fas fa-globe mr-1"></i>Explore</a> </h2>
 
+
+
+    <div class="search-bar" style="max-width: 300px; width:100%; margin-left: 20px;">
+        <form action="" method="get">
+            <input type="text" name="q" id="id_q" placeholder="Search..." class="form-control" value={{query}}>
+        </form>
+    </div>
 </div>
 <div class="body">
-    {% if  books %}
+    {% if book_posts %}
     <div class="card-deck mt-5 mb-3 text-center">
-        {% for book in books %}
-        {% if  book.author == request.user %}
+        {% for book in book_posts %}
+        {% if  book.current_user == request.user.username and  book.is_lent %}
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
-                <h4 class="my-0 font-weight-normal float-left">{{book.name}}</h4>
+                <h4 class="my-0 font-weight-normal float-left">{{book.name}} {% if book.is_lent %}
+                    <span class="badge small badge-pill badge-warning">lent</span>
+                    {% if book.upload_date < book.deadline_date %}
+                    <span class="badge small badge-pill badge-success"> {{book.deadline_date | timeuntil:current_time }}
+                        left</span>
+                    {% else %}
+                    <span class="badge small badge-pill badge-danger">expired!</span>
+                    {% endif %}
+                    {% else %}
+                    <span class="badge small badge-pill badge-success">free</span>
+                    {% endif %}</h4>
                 <div class="head-menu float-right">
-                    <a href="{% url 'upload_book' %}" class="text-warning updatebtn mr-2"><i
-                            class="fas fa-edit mr-1"></i>update</a>
-                    <a href="{% url 'upload_book' %}" class="text-danger deletebtn mr-2"><i
-                            class="fas fa-trash mr-1"></i>delete</a>
+                    <a href="{% url 'return_book' book.id %}" class="text-danger small mr-2"><i
+                            class="fas fa-minus mr-1"></i>return</a>
                     <small> {{book.author}} </small>
                 </div>
 
             </div>
             <div class="card-body">
                 <p>{{book.detail}}</p>
-                <button type="button" class="btn btn-lg btn-outline-danger">Read</button>
             </div>
             <div class="card-footer">
-                <small class="float-left">{{book.upload_date}}</small>
-                <small class="float-right">ISBN - 123432 </small>
+                <small class="float-left "> <span class="text-success">Uploaded Date:
+                        {{book.upload_date}}</span> | <span class="text-danger"> Deadline: {{book.deadline_date}}
+                    </span>
+                </small>
+                <small class="float-right">ISBN - {{book.ISBN_Data}} </small>
             </div>
         </div>
 
@@ -41,9 +56,18 @@
 
         {% endfor %}
     </div>
-
+    {% else %}
+    <div class="card m-auto">
+        <div class="card-body mt-2 mb-2">
+            <h2 class="card-title">
+                No results
+            </h2>
+            <p class="card-text"> There were no results matching your search: "{{query}}"</p>
+        </div>
+    </div>
     {% endif %}
 </div>
+
 
 <style>
     .card-deck {
@@ -62,11 +86,6 @@
         justify-content: space-between;
     }
 
-    .deletebtn,
-    .updatebtn {
-        font-size: 12px;
-    }
-
     .link {
         color: #f6f6f6;
     }
@@ -75,8 +94,15 @@
     .link:focus {
         color: #ed6663;
     }
+
+    .search-bar {
+        max-width: 250px;
+        min-width: 50px;
+        margin: auto 20px;
+        width: 100%;
+    }
 </style>
-
-
-
+<script>
+    document.getElementById("id_q").value = "{{query}}";
+</script>
 {% endblock  %}

@@ -25,7 +25,7 @@
     <style>
         html,
         body {
-            height: 100%;
+            min-height: 100vh;
             background-color: #ed6663;
             font-family: "Montserrat";
 
@@ -38,6 +38,7 @@
 
         .footer {
             color: #f6f6f6;
+            max-height: 5vh;
         }
 
         a,
@@ -54,9 +55,19 @@
             color: #ed6663 !important;
         }
 
+        text-blue {
+            color: #0f4c81;
+        }
+
         .bg-dark {
             background: #1b262c;
         }
+
+        .bg-blue {
+            background: #0f4c81;
+        }
+
+
 
         .wrapper {
             display: flex;
@@ -79,6 +90,10 @@
 
         main {
             margin: 20px auto;
+        }
+
+        .small {
+            font-size: 12px;
         }
 
         .btn-secondary {
@@ -112,10 +127,7 @@
         }
     </style>
 
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
-    <script>
-        const grid = document.querySelector('.grid');
-    </script>
+
     <script src="https://kit.fontawesome.com/802d737aeb.js" crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

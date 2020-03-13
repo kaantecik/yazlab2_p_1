@@ -1,2 +1,15 @@
-Django
+chardet
+cycler
+defusedxml
+django
+django-cleanup
 django-crispy-forms
+idna
+joblib
+kiwisolver
+numpy
+oauthlib
+opencv-python
+pipreqs
+python-dateutil
+pytz

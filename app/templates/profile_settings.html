@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<div class="body">
+
+    <div class="modal fade" id="addusermodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add new user</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <form method="post" class="m-2" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ adduser_form|crispy }}
+                            <br>
+                            <button type="submit" class="btn btn-outline-danger"
+                                style="  border-radius:10px;">ADD</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <h1 style="margin-top: 50px;">Users
+        <a href="#" data-toggle="modal" data-target="#addusermodal" style="position: relative; bottom :8px;"
+            class="badge small badge-pill badge-warning ml-1"><i class="fas fa-plus"></i> add user</a>
+    </h1>
+    <div class="table-responsive bg-blue rounded">
+        <table class="table table-sm text-light">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>username</th>
+                    <th>email</th>
+                    <th>is superuser</th>
+                    <th>last login</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.is_superuser}}</td>
+                    <td>{{user.last_login}}</td>
+                    <td><a href="{% url 'delete_user' user.id %}" class="text-warning small mt-1"><i
+                                class="fas fa-trash"></i> delete
+                        </a></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+    <h1 class="mt-5">Books<a href="{% url 'upload_book' %}" style="position: relative; bottom :8px;"
+            class="badge small badge-pill bg-blue text-warning ml-2"><i class="fas fa-plus"></i> add book</a></h1>
+    <div class="table-responsive bg-warning rounded">
+        <table class="table table-sm  text-dark ">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>author</th>
+                    <th>name</th>
+                    <th>upload date</th>
+                    <th>deadline date</th>
+                    <th>current user</th>
+                    <th>is lent</th>
+                    <th>ISBN number</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{book.id}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.name}}</td>
+                    <td>{{book.upload_date}}</td>
+                    <td>{{book.deadline_date}}</td>
+                    <td>{{book.current_user}}</td>
+                    <td>{{book.is_lent}}</td>
+                    <td>{{book.ISBN_Data}}</td>
+                    <td><a href="{% url 'update_book' book.id %}" class="text-dark small mt-1 mr-2"><i
+                                class="fas fa-edit"></i> update
+                        </a>
+                        <a href="{% url 'delete_book' book.id %}" class="text-danger small mt-1"><i
+                                class="fas fa-trash"></i>
+                            delete
+                        </a></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<style>
+    .body a {
+        position: relative;
+        bottom: 5px;
+    }
+
+    table {
+        font-size: 13px;
+    }
+</style>
+{% endblock body %}
