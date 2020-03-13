@@ -1,2 +1,2 @@
-# yazlab2_p_1
+# yazlab2
 Yazlab 2 Proje 1
