@@ -101,7 +101,6 @@ def books(request):
     if request.GET:
         query = request.GET['q']
         args['query'] = str(query)
-        print(query)
 
     book_posts = sorted(get_book_queryset(
         query), key=attrgetter('upload_date'), reverse=True)
@@ -116,17 +115,18 @@ def profile(request):
     count = 0
     searched = ''
     query = ""
-    current_time = datetime.now()
     tz_Turkey = pytz.timezone('Europe/London')
     current_time = datetime.now(tz_Turkey)
-
+    is_expired = False
     for book in books:
         if book.current_user == request.user.username and book.is_lent:
             count += 1
-            timediff = timesince(book.deadline_date, current_time)
+            if book.upload_date > book.deadline_date:
+                is_expired = True
 
     args = {"books": books, "count": count,
-            "searched": searched, "current_time": current_time}
+            "searched": searched, "current_time": current_time, "is_expired": is_expired}
+
     if request.GET:
         query = request.GET['q']
         args['query'] = str(query)
@@ -170,27 +170,37 @@ def upload_book(request):
 
 @login_required
 def update_book(request, id):
-    updatebook_form = UpdateForm(
-        request.POST or None, request.FILES or None)
+    book = get_object_or_404(Book, id=id)
+    updatebook_form = UpdateForm(request.POST, instance=book)
+    args = {}
+    if request.method == "POST":
+        updatebook_form = UpdateForm(request.POST, instance=book)
+        if updatebook_form.is_valid():
+            post = updatebook_form.save(commit=False)
+            post.save()
+            args = {"updatebook_form": updatebook_form}
+            return redirect(reverse('settings'))
+        """
+            book.update(name=updatebook_form.cleaned_data.get("name"))
+            book.update(detail=updatebook_form.cleaned_data.get("detail"))
+            book.update(is_lent=updatebook_form.cleaned_data.get("is_lent"))
+            book.update(
+                current_user=updatebook_form.cleaned_data.get("current_user"))
+            book.update(
+                deadline_date=updatebook_form.cleaned_data.get("deadline_date"))
+            book.update(
+                upload_date=updatebook_form.cleaned_data.get("upload_date"))
+            book.update(
+                ISBN_Data=updatebook_form.cleaned_data.get("ISBN_Data"))
+            book.update(
+                ISBN_Image=updatebook_form.cleaned_data.get("ISBN_Image"))
+            # book.save()
+            return redirect(reverse('settings'))
+            """
+    else:
+        form = UpdateForm(instance=book)
+        args = {"updatebook_form": updatebook_form}
 
-    book = Book.objects.filter(id=id)
-    if updatebook_form.is_valid():
-        book.update(name=updatebook_form.cleaned_data.get("name"))
-        book.update(detail=updatebook_form.cleaned_data.get("detail"))
-        book.update(is_lent=updatebook_form.cleaned_data.get("is_lent"))
-        book.update(
-            current_user=updatebook_form.cleaned_data.get("current_user"))
-        book.update(
-            deadline_date=updatebook_form.cleaned_data.get("deadline_date"))
-        book.update(
-            upload_date=updatebook_form.cleaned_data.get("upload_date"))
-        book.update(
-            ISBN_Data=updatebook_form.cleaned_data.get("ISBN_Data"))
-        book.update(
-            ISBN_Image=updatebook_form.cleaned_data.get("ISBN_Image"))
-        # book.save()
-        return redirect(reverse('settings'))
-    args = {"updatebook_form": updatebook_form}
     return render(request, "forms/update_books.html", args)
 
 

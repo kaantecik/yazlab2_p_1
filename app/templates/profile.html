@@ -66,6 +66,25 @@
         </div>
     </div>
     {% endif %}
+
+    <div class="modal" id="errormodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-danger text-light">
+                <div class="modal-header">
+                    <h5 class="modal-title">Expiration Warning</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-5">
+                    <p>Your dayline has expired! Refund book now.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-secondary">Got it!</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -102,7 +121,17 @@
         width: 100%;
     }
 </style>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
 <script>
     document.getElementById("id_q").value = "{{query}}";
+    let any_expired = "{{ is_expired }}";
+    $(window).on('load', function () {
+        if (any_expired == "True") {
+            $('#errormodal').modal('show');
+        }
+    });
+
 </script>
 {% endblock  %}
